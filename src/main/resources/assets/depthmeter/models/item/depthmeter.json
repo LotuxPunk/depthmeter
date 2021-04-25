@@ -1,0 +1,39 @@
+{
+  "parent":"item/generated",
+  "texture_size": [16, 16],
+  "textures":{
+    "layer0":"depthmeter:item/depth_void"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "depthmeter:depth": "CAVE"
+      },
+      "model": "depthmeter:item/depthmeter/depthmeter_cave"
+    },
+    {
+      "predicate": {
+        "depthmeter:depth": "VOID"
+      },
+      "model": "depthmeter:item/depthmeter"
+    },
+    {
+      "predicate": {
+        "depthmeter:depth": "SKY"
+      },
+      "model": "depthmeter:item/depthmeter/depthmeter_sky"
+    },
+    {
+      "predicate": {
+        "depthmeter:depth": "SURFACE"
+      },
+      "model": "depthmeter:item/depthmeter/depthmeter_surface"
+    },
+    {
+      "predicate": {
+        "depthmeter:depth": "LAVA"
+      },
+      "model": "depthmeter:item/depthmeter/depthmeter_lava"
+    }
+  ]
+}
