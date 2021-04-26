@@ -1,0 +1,6 @@
+{
+  "depthmeter.sea_level_below":"%s meter(s) below sea level",
+  "depthmeter.sea_level_above":"%s meter(s) above sea level",
+  "item.depthmeter.depthmeter" : "Depth Meter",
+  "itemGroup.depthmeter.main": "Depth Meter"
+}

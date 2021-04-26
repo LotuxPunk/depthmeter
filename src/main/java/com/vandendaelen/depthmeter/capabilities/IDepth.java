@@ -15,7 +15,8 @@ import javax.annotation.Nullable;
 
 public interface IDepth  extends INBTSerializable<CompoundNBT> {
     void tick(PlayerEntity playerEntity);
-    DepthLevels getLevel();
+    DepthLevels getDepth();
+    int getPosSeaLevel();
 
     public static class Storage implements Capability.IStorage<IDepth>{
 

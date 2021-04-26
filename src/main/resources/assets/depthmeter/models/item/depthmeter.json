@@ -7,33 +7,33 @@
   "overrides": [
     {
       "predicate": {
-        "depthmeter:depth": "CAVE"
-      },
-      "model": "depthmeter:item/depthmeter/depthmeter_cave"
-    },
-    {
-      "predicate": {
-        "depthmeter:depth": "VOID"
+        "depth": 0.0
       },
       "model": "depthmeter:item/depthmeter"
     },
     {
       "predicate": {
-        "depthmeter:depth": "SKY"
+        "depth": 1.0
       },
-      "model": "depthmeter:item/depthmeter/depthmeter_sky"
+      "model": "depthmeter:item/depthmeter/depthmeter_lava"
     },
     {
       "predicate": {
-        "depthmeter:depth": "SURFACE"
+        "depth": 2.0
+      },
+      "model": "depthmeter:item/depthmeter/depthmeter_cave"
+    },
+    {
+      "predicate": {
+        "depth": 3.0
       },
       "model": "depthmeter:item/depthmeter/depthmeter_surface"
     },
     {
       "predicate": {
-        "depthmeter:depth": "LAVA"
+        "depth": 4.0
       },
-      "model": "depthmeter:item/depthmeter/depthmeter_lava"
+      "model": "depthmeter:item/depthmeter/depthmeter_sky"
     }
   ]
 }
