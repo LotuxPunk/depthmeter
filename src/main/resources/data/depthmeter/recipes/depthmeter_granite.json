@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "tag": "forge:ingots/copper",
+          "type": "forge:tag_empty"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " G ",
+          "GCG",
+          " G "
+        ],
+        "key": {
+          "G": {
+            "item": "minecraft:granite"
+          },
+          "C": {
+            "item": "minecraft:compass"
+          }
+        },
+        "result": {
+          "item": "depthmeter:depthmeter"
+        }
+      }
+    }
+  ]
+}

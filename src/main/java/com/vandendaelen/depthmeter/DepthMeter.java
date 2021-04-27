@@ -3,16 +3,23 @@ package com.vandendaelen.depthmeter;
 import com.vandendaelen.depthmeter.capabilities.DepthCapability;
 import com.vandendaelen.depthmeter.capabilities.DepthMeterCapabilities;
 import com.vandendaelen.depthmeter.capabilities.IDepth;
+import com.vandendaelen.depthmeter.data.RecipeBuilder;
 import com.vandendaelen.depthmeter.items.DepthMeterItems;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(DepthMeter.MODID)
@@ -23,6 +30,7 @@ public class DepthMeter {
     public DepthMeter() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onGatherData);
 
         DepthMeterItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
@@ -41,5 +49,10 @@ public class DepthMeter {
             }
             return (float) cap.getDepth().ordinal();
         });
+    }
+
+    private void onGatherData(GatherDataEvent e) {
+        DataGenerator generator = e.getGenerator();
+        generator.addProvider(new RecipeBuilder(generator));
     }
 }

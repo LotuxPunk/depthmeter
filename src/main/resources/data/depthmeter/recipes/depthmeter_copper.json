@@ -1,0 +1,35 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": {
+            "tag": "forge:ingots/copper",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " C ",
+          "CRC",
+          " C "
+        ],
+        "key": {
+          "R": {
+            "item": "minecraft:redstone"
+          },
+          "C": {
+            "tag": "forge:ingots/copper"
+          }
+        },
+        "result": {
+          "item": "depthmeter:depthmeter"
+        }
+      }
+    }
+  ]
+}

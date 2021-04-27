@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": {
+            "tag": "forge:ingots/copper",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "depthmeter:depthmeter"
+          ]
+        },
+        "criteria": {
+          "has_dirt": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "minecraft:dirt"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "depthmeter:depthmeter"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_dirt",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}
