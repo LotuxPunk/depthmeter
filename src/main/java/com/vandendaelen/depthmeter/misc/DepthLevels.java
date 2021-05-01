@@ -1,13 +1,15 @@
 package com.vandendaelen.depthmeter.misc;
 
+import com.vandendaelen.depthmeter.config.DepthMeterConfig;
+
 import java.util.Arrays;
 
 public enum DepthLevels {
-    VOID(Integer.MIN_VALUE, -1),
-    LAVA(0, 12),
-    CAVE(13, 50),
-    SURFACE(51,128),
-    SKY(129, Integer.MAX_VALUE);
+    VOID(Integer.MIN_VALUE, DepthMeterConfig.getLimitVoidToLava() - 1),
+    LAVA(DepthMeterConfig.getLimitVoidToLava(), DepthMeterConfig.getLimitLavaToCave() - 1),
+    CAVE(DepthMeterConfig.getLimitLavaToCave(), DepthMeterConfig.getLimitCaveToSurface() - 1),
+    SURFACE(DepthMeterConfig.getLimitLavaToCave(),DepthMeterConfig.getLimitSurfaceToSky() - 1),
+    SKY(DepthMeterConfig.getLimitSurfaceToSky(), Integer.MAX_VALUE);
 
     private final int minValue;
     private final int maxValue;
