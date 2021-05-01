@@ -1,11 +1,8 @@
 package com.vandendaelen.depthmeter.items;
 
 import com.vandendaelen.depthmeter.capabilities.DepthMeterCapabilities;
-import com.vandendaelen.depthmeter.misc.DepthLevels;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
@@ -13,7 +10,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 

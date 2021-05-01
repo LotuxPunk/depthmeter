@@ -2,7 +2,6 @@ package com.vandendaelen.depthmeter.capabilities;
 
 import com.vandendaelen.depthmeter.misc.DepthLevels;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
