@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -23,7 +24,7 @@ public class DepthMeterItem extends Item {
     private static final String DEPTH = "depth";
 
     public DepthMeterItem() {
-        super(new Properties().maxStackSize(1).group(DepthMeterItemGroups.MAIN));
+        super(new Properties().maxStackSize(1).group(ItemGroup.TOOLS));
     }
 
     @Override
@@ -33,7 +34,6 @@ public class DepthMeterItem extends Item {
         if (!worldIn.isRemote()){
             if (entityIn instanceof ServerPlayerEntity){
                 stack.getCapability(DepthMeterCapabilities.DEPTH).ifPresent(cap -> cap.tick((PlayerEntity) entityIn));
-//                stack.getOrCreateTag().putFloat(DEPTH, (float)DepthLevels.from(((int) entityIn.getPosY())).ordinal());
             }
             if (worldIn.getGameTime() % 20 == 0) {
                 syncCapability(stack);
