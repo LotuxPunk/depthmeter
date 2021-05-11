@@ -9,6 +9,8 @@ import com.vandendaelen.depthmeter.items.DepthMeterItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -26,7 +28,6 @@ public class DepthMeter {
 
     public DepthMeter() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onGatherData);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DepthMeterConfig.COMMON_SPEC);
@@ -38,16 +39,6 @@ public class DepthMeter {
 
     private void setup(final FMLCommonSetupEvent event) {
         CapabilityManager.INSTANCE.register(IDepth.class, new IDepth.Storage(), DepthCapability::new);
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        ItemModelsProperties.registerProperty(DepthMeterItems.DEPTHMETER.get(), new ResourceLocation("depth"), (stack, world, entity) -> {
-            IDepth cap = stack.getCapability(DepthMeterCapabilities.DEPTH).orElse(null);
-            if (cap == null){
-                return 0f;
-            }
-            return (float) cap.getDepth().ordinal();
-        });
     }
 
     private void onGatherData(GatherDataEvent e) {
