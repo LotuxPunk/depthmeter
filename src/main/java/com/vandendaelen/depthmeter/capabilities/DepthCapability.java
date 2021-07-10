@@ -4,6 +4,8 @@ import com.vandendaelen.depthmeter.misc.DepthLevels;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.Dimension;
 
 public class DepthCapability implements IDepth {
     private DepthLevels depth = DepthLevels.VOID;
@@ -16,8 +18,20 @@ public class DepthCapability implements IDepth {
     @Override
     public void tick(PlayerEntity playerEntity) {
         if (playerEntity instanceof ServerPlayerEntity){
-            depth = DepthLevels.from(((int) playerEntity.getPosY()));
-            posSeaLevel = (int)playerEntity.getPosY() - 63;
+            ResourceLocation currentDimension = ((ServerPlayerEntity)playerEntity).getServerWorld().getDimensionKey().getLocation();
+            int seaLevel = ((ServerPlayerEntity)playerEntity).getServerWorld().getSeaLevel();
+
+            if (currentDimension == Dimension.THE_NETHER.getLocation()){
+                depth = DepthLevels.LAVA;
+            }
+            else if (currentDimension == Dimension.THE_END.getLocation()){
+                depth = DepthLevels.VOID;
+            }
+            else{
+                depth = DepthLevels.from(((int) playerEntity.getPosY()));
+            }
+
+            posSeaLevel = (int)playerEntity.getPosY() - seaLevel;
             this.serializeNBT();
         }
     }
