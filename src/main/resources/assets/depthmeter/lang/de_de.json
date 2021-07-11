@@ -2,5 +2,5 @@
     "depthmeter.sea_level_below":"%s meter unter dem Meeresspiegel",
     "depthmeter.sea_level_above":"%s meter über dem Meeresspiegel",
     "item.depthmeter.depthmeter" :"Höhenmaß",
-    "itemGroup.depthmeter.main": "Höhenmaß"
+    "itemGroup.depthmeter.main": "Depth Meter"
   }
