@@ -4,8 +4,8 @@ import com.vandendaelen.depthmeter.DepthMeter;
 import com.vandendaelen.depthmeter.capabilities.DepthCapability;
 import com.vandendaelen.depthmeter.capabilities.IDepth;
 import com.vandendaelen.depthmeter.items.DepthMeterItems;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +19,4 @@ public class CommonEvents {
         if (event.getObject().getItem() == DepthMeterItems.DEPTHMETER.get())
             event.addCapability(DEPTH_CAP, new IDepth.Provider(new DepthCapability()));
     }
-
-
 }

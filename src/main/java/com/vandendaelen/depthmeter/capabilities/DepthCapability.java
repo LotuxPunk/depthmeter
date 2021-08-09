@@ -1,11 +1,11 @@
 package com.vandendaelen.depthmeter.capabilities;
 
 import com.vandendaelen.depthmeter.misc.DepthLevels;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.Dimension;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class DepthCapability implements IDepth {
     private DepthLevels depth = DepthLevels.VOID;
@@ -16,22 +16,22 @@ public class DepthCapability implements IDepth {
     }
 
     @Override
-    public void tick(PlayerEntity playerEntity) {
-        if (playerEntity instanceof ServerPlayerEntity){
-            ResourceLocation currentDimension = ((ServerPlayerEntity)playerEntity).getServerWorld().getDimensionKey().getLocation();
-            int seaLevel = ((ServerPlayerEntity)playerEntity).getServerWorld().getSeaLevel();
+    public void tick(Player playerEntity) {
+        if (playerEntity instanceof ServerPlayer){
+            ResourceLocation currentDimension = ((ServerPlayer)playerEntity).getLevel().dimension().location();
+            int seaLevel = ((ServerPlayer)playerEntity).getLevel().getSeaLevel();
 
-            if (currentDimension == Dimension.THE_NETHER.getLocation()){
+            if (currentDimension == Level.NETHER.location()){
                 depth = DepthLevels.LAVA;
             }
-            else if (currentDimension == Dimension.THE_END.getLocation()){
+            else if (currentDimension == Level.END.location()){
                 depth = DepthLevels.VOID;
             }
             else{
-                depth = DepthLevels.from(((int) playerEntity.getPosY()));
+                depth = DepthLevels.from((playerEntity.getBlockY()));
             }
 
-            posSeaLevel = (int)playerEntity.getPosY() - seaLevel;
+            posSeaLevel = playerEntity.getBlockY() - seaLevel;
             this.serializeNBT();
         }
     }
@@ -47,15 +47,15 @@ public class DepthCapability implements IDepth {
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
+    public CompoundTag serializeNBT() {
+        CompoundTag tag = new CompoundTag();
         tag.putFloat("depth", (float)depth.ordinal());
         tag.putInt("pos_sea_level", posSeaLevel);
         return tag;
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void deserializeNBT(CompoundTag nbt) {
         depth = DepthLevels.values()[(int)nbt.getFloat("depth")];
         posSeaLevel = nbt.getInt("pos_sea_level");
     }

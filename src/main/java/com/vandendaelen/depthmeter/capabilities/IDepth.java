@@ -1,38 +1,20 @@
 package com.vandendaelen.depthmeter.capabilities;
 
 import com.vandendaelen.depthmeter.misc.DepthLevels;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
-import javax.annotation.Nullable;
-
-public interface IDepth  extends INBTSerializable<CompoundNBT> {
-    void tick(PlayerEntity playerEntity);
+public interface IDepth  extends INBTSerializable<CompoundTag> {
+    void tick(Player playerEntity);
     DepthLevels getDepth();
     int getPosSeaLevel();
 
-    public static class Storage implements IStorage<IDepth>{
-
-        @Nullable
-        @Override
-        public INBT writeNBT(Capability<IDepth> capability, IDepth instance, Direction side) {
-            return instance.serializeNBT();
-        }
-
-        @Override
-        public void readNBT(Capability<IDepth> capability, IDepth instance, Direction side, INBT nbt) {
-            instance.deserializeNBT((CompoundNBT) nbt);
-        }
-    }
-
-    public static class Provider implements ICapabilitySerializable<CompoundNBT> {
+    public static class Provider implements ICapabilitySerializable<CompoundTag> {
 
         private IDepth depth;
 
@@ -47,16 +29,16 @@ public interface IDepth  extends INBTSerializable<CompoundNBT> {
         @SuppressWarnings("unchecked")
         @Override
         public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-            return cap == DepthMeterCapabilities.DEPTH ? (LazyOptional<T>) LazyOptional.of(() -> (T) depth) : LazyOptional.empty();
+            return cap == DepthMeterCapabilities.DEPTH ? LazyOptional.of(() -> (T) depth) : LazyOptional.empty();
         }
 
         @Override
-        public CompoundNBT serializeNBT() {
+        public CompoundTag serializeNBT() {
             return depth.serializeNBT();
         }
 
         @Override
-        public void deserializeNBT(CompoundNBT nbt) {
+        public void deserializeNBT(CompoundTag nbt) {
             depth.deserializeNBT(nbt);
         }
 
