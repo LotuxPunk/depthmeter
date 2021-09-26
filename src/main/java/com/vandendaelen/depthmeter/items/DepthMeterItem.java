@@ -2,6 +2,7 @@ package com.vandendaelen.depthmeter.items;
 
 import com.vandendaelen.depthmeter.capabilities.DepthMeterCapabilities;
 import com.vandendaelen.depthmeter.capabilities.IDepth;
+import com.vandendaelen.depthmeter.config.DepthMeterConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,10 +22,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class DepthMeterItem extends Item {
-    private static final String DEPTH = "depth";
-
     public DepthMeterItem() {
-        super(new Properties().stacksTo(1).tab(CreativeModeTab.TAB_TOOLS));
+        super(new Properties().stacksTo(DepthMeterConfig.getStackable() ? 64 : 1).tab(CreativeModeTab.TAB_TOOLS));
     }
 
     @Override

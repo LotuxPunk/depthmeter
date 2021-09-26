@@ -21,6 +21,7 @@ public class DepthMeterConfig {
         public final ForgeConfigSpec.IntValue limitLavaToCave;
         public final ForgeConfigSpec.IntValue limitCaveToSurface;
         public final ForgeConfigSpec.IntValue limitSurfaceToSky;
+        public final ForgeConfigSpec.BooleanValue stackable;
 
         public Common(ForgeConfigSpec.Builder builder) {
             builder.push("Limits settings");
@@ -36,6 +37,9 @@ public class DepthMeterConfig {
             limitSurfaceToSky = builder
                     .comment("Y level for Surface/Sky junction", "Constraint : limitSurfaceToSky > limitCaveToSurface")
                     .defineInRange("limitSurfaceToSky", 129, MIN_VALUE, MAX_VALUE);
+            stackable = builder
+                    .comment("Is DepthMeter item stackable ?")
+                            .define("stackable", false);
             builder.pop();
         }
     }
@@ -55,4 +59,6 @@ public class DepthMeterConfig {
     public static int getLimitSurfaceToSky() {
         return COMMON.limitSurfaceToSky.get();
     }
+
+    public static boolean getStackable() { return COMMON.stackable.get(); }
 }
