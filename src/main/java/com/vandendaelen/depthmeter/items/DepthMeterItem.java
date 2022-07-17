@@ -5,7 +5,7 @@ import com.vandendaelen.depthmeter.capabilities.IDepth;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -57,12 +57,12 @@ public class DepthMeterItem extends Item {
         return super.use(worldIn, playerIn, handIn);
     }
 
-    public TranslatableComponent getDepthInformation(IDepth cap){
+    public MutableComponent getDepthInformation(IDepth cap) {
         int posSeaLevel = cap.getPosSeaLevel();
-        if (posSeaLevel >= 0){
-            return new TranslatableComponent("depthmeter.sea_level_above", String.valueOf(Math.abs(posSeaLevel)));
+        if (posSeaLevel >= 0) {
+            return Component.translatable("depthmeter.sea_level_above", String.valueOf(Math.abs(posSeaLevel)));
         }
-        return new TranslatableComponent("depthmeter.sea_level_below", String.valueOf(Math.abs(posSeaLevel)));
+        return Component.translatable("depthmeter.sea_level_below", String.valueOf(Math.abs(posSeaLevel)));
     }
 
     @Override

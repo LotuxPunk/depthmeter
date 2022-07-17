@@ -7,11 +7,11 @@ import com.vandendaelen.depthmeter.items.DepthMeterItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod(DepthMeter.MODID)
 public class DepthMeter {
@@ -35,6 +35,6 @@ public class DepthMeter {
 
     private void onGatherData(GatherDataEvent e) {
         DataGenerator generator = e.getGenerator();
-        generator.addProvider(new RecipeBuilder(generator));
+        generator.addProvider(true, new RecipeBuilder(generator));
     }
 }
